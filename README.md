@@ -2,7 +2,7 @@
 
 A hands-on implementation demonstrating how to securely deliver static web assets using Amazon CloudFront and a private Amazon S3 origin, enforcing least-privilege edge security. Instead of exposing the bucket publicly to the internet, this architecture restricts origin access exclusively to the CloudFront distribution using modern **Origin Access Control (OAC)** with Signature Version 4 (SigV4) request signing.
 
-![Architecture Diagram](Screenshot%202026-09-13%20132438.png)
+![Architecture Diagram](images/Screenshot%202026-09-13%20132438.png)
 
 > **Credits & Acknowledgments:**  
 > Based on the CloudFront and S3 architectural demo lab by **Adrian Cantrill** ([learn.cantrill.io](https://learn.cantrill.io)). Implemented, debugged, and documented as a hands-on portfolio build focusing on production-grade origin security and troubleshooting.
