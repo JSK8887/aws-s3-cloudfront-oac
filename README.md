@@ -34,7 +34,7 @@ The application architecture isolates origin storage while providing low-latency
 ### Stage 1: Configure S3 Bucket & Origin Isolation
 Created a private S3 bucket, uploaded the website assets, and kept "Block all public access" fully enabled. Verified that direct HTTP/S access attempts to the S3 bucket URL fail with a `403 Forbidden` error, ensuring the origin cannot be reached directly from the internet.
 
-![Direct S3 Access Blocked](Screenshot%202026-09-13%20123026.png)
+![Direct S3 Access Blocked](images/Screenshot%202026-09-13%20123026.png)
 
 ---
 
@@ -43,7 +43,7 @@ Deployed an Amazon CloudFront distribution pointing to the S3 bucket's REST endp
 
 | Origin Settings | OAC Details |
 | :---: | :---: |
-| ![Origin Setup](Screenshot%202026-09-13%20130302.png) | ![OAC Details](Screenshot%202026-09-13%20125901.png) |
+| ![Origin Setup](images/Screenshot%202026-09-13%20130302.png) | ![OAC Details](images/Screenshot%202026-09-13%20125901.png) |
 
 ---
 
@@ -73,28 +73,28 @@ Attached a resource-based bucket policy to the S3 bucket granting `s3:GetObject`
 }
 ```
 
-![Bucket Policy Verification](Screenshot%202026-09-13%20122926.png)
+![Bucket Policy Verification](images/Screenshot%202026-09-13%20122926.png)
 
 ---
 
 ### Stage 4: Configure Distribution Settings & Default Root Object
 Navigated to Distribution Settings under the General tab and set the **Default root object** to `index.html`. This ensures that incoming apex requests to `https://dmcfwrd07pxw9.cloudfront.net/` automatically append the root document rather than failing on an S3 REST bucket lookup.
 
-![Default Root Object Setting](Screenshot%202026-09-13%20124856.png)
+![Default Root Object Setting](images/Screenshot%202026-09-13%20124856.png)
 
 ---
 
 ### Stage 5: Create CloudFront Cache Invalidation
 Created a cache invalidation for path `/*` to purge existing edge cache copies globally. Monitored the invalidation status until it moved to **Completed**, ensuring edge locations fetch the latest permissions and assets directly from the S3 origin.
 
-![Cache Invalidation Completed](Screenshot%202026-09-13%20124958.png)
+![Cache Invalidation Completed](images/Screenshot%202026-09-13%20124958.png)
 
 ---
 
 ### Stage 6: Verify Edge Delivery via HTTPS
 Tested the site by browsing directly to the CloudFront distribution domain (`https://dmcfwrd07pxw9.cloudfront.net`). Confirmed that the edge distribution successfully signs the origin request via OAC, retrieves the private objects from S3, and serves the website securely over HTTPS.
 
-![CloudFront Live Delivery](Screenshot%202026-09-13%20123049.png)
+![CloudFront Live Delivery](images/Screenshot%202026-09-13%20123049.png)
 
 ---
 
